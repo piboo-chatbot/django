@@ -1,50 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@800&display=swap');
+/* Albert Sans 폰트 임포트 */
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700&display=swap');
 
 body {
-    margin: 0; padding: 0;
-    font-family: 'Albert Sans', sans-serif;
+  font-family: 'Albert Sans', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-.phone-frame {
-    width: 320px; height: 640px; margin: 30px auto 0 auto;
-    border-radius: 40px; background-color: #f9f9f9;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1); position: relative;
-    overflow: hidden; display: flex; flex-direction: column;
+
+.chat-container {
+  width: 800px; /* ✅ 폭을 800px로 넓게 설정 */
+  max-width: 90%;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-.logo-area { padding: 32px 0 0 0; text-align: center; }
-.logo-img { width: 54px; height: 54px; display: block; margin: 0 auto; }
+
+.chat-header {
+  background-color: #ff3b5c;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chat-header img.logo-img {
+  width: 60px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.chat-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
 .chat-area {
-    flex: 1; overflow-y: auto; padding: 10px 15px;
-    display: flex; flex-direction: column; gap: 8px;
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fff;
 }
+
 .message-bubble {
-    max-width: 75%; padding: 10px 15px; border-radius: 18px;
-    font-size: 10px; line-height: 1.4; word-break: break-word;
+  margin-bottom: 15px;
+  padding: 12px 18px;
+  border-radius: 15px;
+  max-width: 70%; 
+  word-break: break-word;
 }
+
 .user-message {
-    background-color: #ff3b5c; color: white; margin-left: auto;
-    border-radius: 18px 18px 4px 18px;
+  background-color: #ff3b5c;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
 }
+
 .bot-message {
-    background-color: #fff0f3; color: #ff3b5c; margin-right: auto;
-    border-radius: 18px 18px 18px 4px;
+  background-color: #e0e0e0;
+  color: #333;
+  align-self: flex-start;
+  margin-right: auto;
 }
+
 .input-area {
-    width: 100%; padding: 0 16px 16px 16px; box-sizing: border-box;
-    display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 15px;
+  background-color: #f0f0f0;
 }
-.input-container {
-    display: flex; align-items: center; width: 90%; margin: 0 auto;
-    background: #efefef; border-radius: 24px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.04); padding: 6px 12px; gap: 8px;
-}
-.send-btn {
-    background: #ffb3c1; color: #fff; border: none; border-radius: 10px;
-    width: 40px; height: 35px; font-size: 13px; font-weight: 700;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s; box-sizing: border-box;
-}
-.send-btn:hover { background: #ff3b5c; }
+
 .input-box {
-    flex: 1; min-width: 0; max-width: 100%; border: none; background: #efefef;
-    padding: 10px 8px; font-size: 13px; outline: none; color: #222;
+  flex: 1;
+  padding: 12px;
+  width: 800px;
+  border: none;
+  border-radius: 20px;
+  margin-right: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.send-btn {
+  background-color: #ff3b5c;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.send-btn:hover {
+  background-color: white;
+  color: #ff3b5c;
+  border: 2px solid #ff3b5c;
 }

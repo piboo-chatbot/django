@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PiBoo 🌸</title>
-    <link rel="stylesheet" href="{% static 'style/intro.css' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PiBoo 🌸</title>
+<link rel="stylesheet" href="{% static 'style/intro.css' %}">
 </head>
 <body>
-    <div class="phone">
-        <div>
-            <img src="{% static 'images/intro.png' %}" class="logo" alt="PiBoo 로고">
-            <div class="brand">PiBoo</div>
-        </div>
-        <button class="start-btn" onclick="location.href='{% url 'chatbot' %}'">시작하기</button>
-    </div>
+<div class="container">
+    <img src="{% static 'images/intro.png' %}" class="logo" alt="PiBoo 로고">
+    <div class="brand">PiBoo</div>
+    <button class="start-btn" onclick="location.href='{% url 'chatbot' %}'">시작하기</button>
+    <button class="login-btn" onclick="location.href='{% url 'login' %}'">로그인</button>
+    <button class="signup-btn" onclick="location.href='{% url 'signup' %}'">회원가입</button>
+</div>
 </body>
 </html>

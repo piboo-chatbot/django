@@ -1,0 +1,106 @@
+/* 회원가입 페이지 스타일 (intro.css와 같은 컨셉) */
+
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@800&display=swap');
+
+body {
+  background-color: #f9f9f9;
+  font-family: 'Albert Sans', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.phone {
+  width: 320px;
+  border-radius: 40px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.logo {
+  width: 100px;
+  margin: 20px auto;
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 32px;
+  color: #ff3b5c;
+  margin: 10px 0 30px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.start-btn {
+  background-color: #ff3b5c;
+  color: white;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.start-btn:hover {
+  background-color: white;
+  color: #ff3b5c;
+  border: 2px solid #ff3b5c;
+}
+
+.input-with-btn {
+  display: flex;
+  gap: 5px;
+}
+
+.input-with-btn input {
+  flex: 1;
+}
+
+.input-with-btn button {
+  background-color: #ff3b5c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.input-with-btn button:hover {
+  background-color: white;
+  color: #ff3b5c;
+  border: 1px solid #ff3b5c;
+}

@@ -17,11 +17,15 @@ embedding_model = set_embedding_model()
 chroma1, chroma2 = load_chromadbs(embedding_model)
 ensemble_retriever = create_ensemble_retriever(chroma1, chroma2)
 llm_model = ChatOpenAI(model_name='gpt-4o-mini', temperature=0.4)
-qlora_model= load_qlora_llm(
-        base_model_path="beomi/KoAlpaca-Polyglot-5.8B",
-        adapter_path="./qlora_model_koalpaca"
-    )
-chat_memory = get_chain(qlora_model)#llm_model
+# qlora_model= load_qlora_llm(
+#         base_model_path="beomi/KoAlpaca-Polyglot-5.8B",
+#         adapter_path="./qlora_model_koalpaca"
+#     )
+# chat_memory = get_chain(qlora_model)#llm_model
+chat_memory = get_chain(llm_model)
+
+def chatbot_page(request):
+    return render(request, 'chatbot.html')
 
 class AskView(APIView):
     def post(self, request):

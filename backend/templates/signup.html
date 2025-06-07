@@ -2,62 +2,81 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원가입 - PiBoo 🌸</title>
-  <link rel="stylesheet" href="{% static 'style/signup.css' %}">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <meta charset="utf-8">
+    <title>Piboo 회원가입</title>
+    <link rel="stylesheet" href="{% static 'style/signup.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@800&display=swap" rel="stylesheet">
+    <script>
+    function checkDuplicate(field) {
+        const value = document.querySelector(`[name="${field}"]`).value;
+        if (!value) {
+            alert('값을 입력하세요!');
+            return;
+        }
+        fetch(`/users/check_${field}/?${field}=${encodeURIComponent(value)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists) alert('이미 사용 중입니다!');
+                else alert('사용 가능합니다!');
+            });
+    }
+    function validatePassword() {
+        const pw1 = document.querySelector('[name="password1"]').value;
+        const pw2 = document.querySelector('[name="password2"]').value;
+        const msg = document.getElementById('pw-msg');
+        const btn = document.querySelector('.signup-btn');
+        if (pw1 && pw2) {
+            if (pw1 === pw2) {
+                msg.textContent = '비밀번호가 일치합니다.';
+                msg.style.color = '#3cb371';
+                btn.disabled = false;
+            } else {
+                msg.textContent = '비밀번호가 일치하지 않습니다.';
+                msg.style.color = '#ff3b5c';
+                btn.disabled = true;
+            }
+        } else {
+            msg.textContent = '';
+            btn.disabled = true;
+        }
+    }
+    </script>
 </head>
 <body>
-  <div class="phone">
-    <div>
-      <img src="{% static 'images/intro.png' %}" class="logo" alt="PiBoo 로고">
-      <div class="brand">회원가입</div>
+    <div class="signup-wrapper">
+        <img src="{% static 'images/intro.png' %}" class="logo-img" alt="Piboo Logo">
+        <div class="brand">Piboo</div>
+        <form class="signup-form" method="post" autocomplete="off">
+            {% csrf_token %}
+            <!-- 에러 메시지 출력 -->
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div style="color:red;">{{ field.label }}: {{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+            <div class="input-row">
+                <input type="text" class="signup-input" name="username" placeholder="아이디" required>
+                <button type="button" class="check-btn" onclick="checkDuplicate('username')">중복체크</button>
+            </div>
+            <div class="input-row">
+                <input type="text" class="signup-input" name="nickname" placeholder="닉네임" required>
+                <button type="button" class="check-btn" onclick="checkDuplicate('nickname')">중복체크</button>
+            </div>
+
+            <div class="input-row flex">
+                <input type="number" class="signup-input" name="age" placeholder="나이" min="0" required>
+                <select name="gender" class="signup-input" required>
+                    <option value="">성별 선택</option>
+                    <option value="0">남자</option>
+                    <option value="1">여자</option>
+                </select>
+            </div>
+
+            <input type="password" class="signup-input" name="password1" placeholder="비밀번호를 입력하세요" required oninput="validatePassword()">
+            <input type="password" class="signup-input" name="password2" placeholder="비밀번호 확인하기" required oninput="validatePassword()">
+            <div id="pw-msg" style="margin-bottom:10px; font-size:14px;"></div>
+            <button type="submit" class="signup-btn" disabled>회원가입</button>
+        </form>
     </div>
-
-    <form method="post" action="{% url 'signup' %}" class="form-container">
-      {% csrf_token %}
-
-      <div class="input-group">
-        <label for="username">사용자아이디</label>
-        <div class="input-with-btn">
-          <input type="text" id="username" name="username" required />
-          <!-- <button type="button" id="check-duplicate-btn">중복확인</button> -->
-        </div>
-      </div>
-
-      <div class="input-group">
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-
-      <div class="input-group">
-        <label for="name">이름</label>
-        <input type="text" id="name" name="name" required />
-      </div>
-
-      <div class="input-group">
-        <label for="age">나이</label>
-        <input type="number" id="age" name="age" required />
-      </div>
-
-      <div class="input-group">
-        <label for="gender">성별</label>
-        <select id="gender" name="gender" required>
-          <option value="">선택</option>
-          <option value="남">남</option>
-          <option value="여">여</option>
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label for="phone">전화번호</label>
-        <input type="tel" id="phone" name="phone" required />
-      </div>
-
-      <button type="submit" class="start-btn">회원가입</button>
-      <button type="button" class="start-btn" onclick="location.href='{% url 'intro' %}'">돌아가기</button>
-    </form>
-  </div>
 </body>
 </html>

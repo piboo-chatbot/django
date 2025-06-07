@@ -6,28 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>로그인 - PiBoo 🌸</title>
   <link rel="stylesheet" href="{% static 'style/login.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="phone">
-    <div>
-      <img src="{% static 'images/intro.png' %}" class="logo" alt="PiBoo 로고">
-      <div class="brand">로그인</div>
-    </div>
-
-    <form method="post" action="{% url 'login' %}" class="form-container">
+  <div class="login-center">
+    <img src="{% static 'images/intro.png' %}" class="logo-img" alt="PiBoo 로고">
+    <div class="brand">Piboo</div>
+    <form method="post" action="{% url 'login' %}" class="login-form">
       {% csrf_token %}
-      <div class="input-group">
-        <label for="username">아이디</label>
-        <input type="text" id="username" name="username" required />
+      <div class="input-wrap">
+        <div class="input-icon">
+          <span class="icon user"></span>
+          <input type="text" id="username" name="username" placeholder="아이디" required />
+        </div>
+        <div class="input-icon">
+          <span class="icon lock"></span>
+          <input type="password" id="password" name="password" placeholder="비밀번호" required />
+        </div>
       </div>
-
-      <div class="input-group">
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" required />
+      <div class="login-options">
+        <label class="checkbox-label">
+          <input type="checkbox" name="remember" />
+          로그인 상태 유지하기
+        </label>
+        <div class="login-links">
+          <a href="{% url 'signup' %}">회원가입</a>
+          <span>|</span>
+          <a href="#">비밀번호 찾기</a>
+        </div>
       </div>
-
-      <button type="submit" class="start-btn">로그인</button>
-      <button type="button" class="secondary-btn" onclick="location.href='{% url 'intro' %}'">돌아가기</button>
+      <div class="social-login">
+        <!-- <img src="{% static 'images/google.svg' %}" alt="구글 로그인" class="social-icon">
+        <img src="{% static 'images/kakao.svg' %}" alt="카카오 로그인" class="social-icon">
+        <img src="{% static 'images/apple.svg' %}" alt="애플 로그인" class="social-icon"> -->
+      </div>
+      <button type="submit" class="login-btn">로그인</button>
     </form>
   </div>
 </body>

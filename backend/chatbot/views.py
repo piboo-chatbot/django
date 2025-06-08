@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -36,48 +37,16 @@ def intro_view(request):
     return render(request, 'index.html')
 
 class AskView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         query = request.data.get('query')
-        session_id = request.data.get('session_id')
+        #session_id = request.data.get('session_id')
+        session_id = request.user.id
         search_results = search_documents(ensemble_retriever, query)
         response = chat_memory.invoke(
             {"query": query, "search_results": search_results},
             config={"configurable": {"session_id": session_id}}
         )
+        print(f"query {query} | session_id {session_id}")
         return Response({"answer": response.content}, status=status.HTTP_200_OK)
-    
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('chatbot')  # 로그인 성공 시 chatbot 화면으로
-        else:
-            return render(request, 'login.html', {'error': '아이디 또는 비밀번호가 틀렸습니다.'})
-    return render(request, 'login.html')
-
-
-def signup_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        name = request.POST.get('name')
-        age = request.POST.get('age')
-        gender = request.POST.get('gender')
-        phone = request.POST.get('phone')
-
-        # 아이디 중복 여부 확인
-        if User.objects.filter(username=username).exists():
-            return render(request, 'signup.html', {'error': '이미 존재하는 아이디입니다.'})
-
-        # 사용자 생성
-        user = User.objects.create_user(username=username, password=password)
-        # 이름, 나이, 성별, 전화번호 등은 커스텀 UserProfile 모델을 만든 후 연결하거나, 추가 필드를 위한 모델을 따로 만들어 관리하는 것을 권장해!
-        # 지금은 단순 예시로 User 객체 생성만 해줄게.
-        user.save()
-
-        return redirect('login')  # 회원가입 후 로그인 화면으로
-
-    return render(request, 'signup.html')

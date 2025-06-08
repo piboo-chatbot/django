@@ -14,18 +14,21 @@
     <div class="chat-area" id="chat-area"></div>
     <div class="input-area">
         <div class="input-container">
-            <input type="text" class="input-box" id="user-input" placeholder="" autocomplete="off"/>
+            <!-- <input type="text" class="input-box" id="user-input" placeholder="" autocomplete="off"/>
+              -->
+            <textarea class="input-box" id="user-input" placeholder="" autocomplete="off"></textarea>
             <button class="send-btn" id="send-btn">Send</button>
         </div>
     </div>
+
     <script>
         const chatArea = document.getElementById("chat-area");
         const inputBox = document.getElementById("user-input");
         const sendBtn = document.getElementById("send-btn");
 
         let messages = [];
-        
-         // CSRF 토큰 가져오기 함수
+
+        // CSRF 토큰 가져오기
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -52,19 +55,36 @@
                     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
                     .replace(/\n/g, "<br>");
             }
+
             chatArea.innerHTML = "";
+
             for (const msg of messages) {
                 const div = document.createElement("div");
                 div.className = "message-bubble " + (msg.role === "user" ? "user-message" : "bot-message");
                 div.innerHTML = formatContent(msg.content);
                 chatArea.appendChild(div);
             }
-            chatArea.scrollTop = chatArea.scrollHeight;
+
+            // 스크롤 하단 고정
+            setTimeout(() => {
+                const lastMsg = chatArea.lastElementChild;
+                if (lastMsg) {
+                    lastMsg.scrollIntoView({ behavior: "smooth", block: "end" });
+                }
+
+                window.scrollTo({
+                    top: document.documentElement.scrollHeight,
+                    behavior: 'smooth'
+                });
+
+            }, 0);
+            
         }
 
         async function sendMessage() {
             const val = inputBox.value.trim();
             if (!val) return;
+
             messages.push({role: "user", content: val});
             renderMessages();
             inputBox.value = "";
@@ -72,34 +92,44 @@
             try {
                 const response = await fetch("{% url 'ask' %}", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json",
-                                "X-CSRFToken": csrftoken
-                     },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrftoken
+                    },
                     body: JSON.stringify({ query: val })
                 });
+
                 if (response.ok) {
                     const data = await response.json();
                     messages.push({role: "bot", content: data.answer || "답변이 없습니다."});
                 } else {
                     messages.push({role: "bot", content: "❌ 오류가 발생했습니다. 다시 시도해주세요."});
                 }
+                renderMessages();
+
             } catch (e) {
                 messages.push({role: "bot", content: "❌ 서버 연결 오류: " + e});
+                renderMessages();
             }
-            renderMessages();
         }
-
-        sendBtn.onclick = sendMessage;
+        
         let isComposing = false;
+
+        inputBox.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
         inputBox.addEventListener("compositionstart", () => { isComposing = true; });
         inputBox.addEventListener("compositionend", () => { isComposing = false; });
 
         inputBox.addEventListener("keydown", function(e) {
-            if (e.key === "Enter" && !isComposing) {
+            if (e.key === "Enter" && !e.shiftKey && !isComposing) {
                 e.preventDefault();
                 sendMessage();
             }
         });
+        sendBtn.onclick = sendMessage;
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@ from django.db import models
 
 class User(AbstractUser):
     nickname = models.CharField('닉네임', max_length=50, unique=True)
-    email = models.EmailField('이메일', max_length=255, unique=True, null=True, blank=True, default=None)
+    # email = models.EmailField('이메일', max_length=255, unique=True, null=True, blank=True, default=None)
     age = models.PositiveIntegerField('나이', null=True, blank=True)
     GENDER_CHOICES = (
         (0, '남자'),

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AskView, chatbot_page, signup_view, login_view ,intro_view
+from .views import AskView, chatbot_page, intro_view
 
 
 urlpatterns = [

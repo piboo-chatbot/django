@@ -4,7 +4,10 @@ from django.http import JsonResponse
 from .models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-
+from users.models import ChatHistory
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from chatbot.models import ChatLog
 def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -44,3 +47,14 @@ def mypage_view(request):
 def logout_view(request):
     logout(request)
     return redirect('intro')
+
+@login_required
+def mypage_view(request):
+    nickname = request.user.nickname
+    chat_logs = ChatLog.objects.filter(nickname=nickname).order_by('-created_at')
+
+    context = {
+            'user': request.user,
+            'chat_logs': chat_logs,
+        }
+    return render(request, 'mypage.html', context)

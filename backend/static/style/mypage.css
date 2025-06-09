@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700;800&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Albert Sans', 'Pretendard', sans-serif;
+  background: linear-gradient(90deg, #fff5f8 60%, #ffe0ec 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mypage-container {
+  width: 100%;
+  max-width: 420px;
+  margin: 60px auto 0 auto;
+  background: rgba(255,255,255,0.97);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px rgba(255, 59, 92, 0.08);
+  padding: 48px 32px;
+  text-align: left;
+}
+
+h1 {
+  color: #ff3b5c;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.profile-info p,
+.stat-item,
+.mypage-routine p {
+  font-size: 16px;
+  color: #444;
+  margin: 8px 0;
+}
+
+.profile-info p strong,
+.mypage-stats h2,
+.mypage-history h2,
+.mypage-routine h2 {
+  color: #ff3b5c;
+  font-weight: 700;
+}
+
+.mypage-stats,
+.mypage-history,
+.mypage-routine {
+  margin: 24px 0;
+}
+
+.chat-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.chat-bubble {
+  background: #fff0f3;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(255, 59, 92, 0.04);
+  padding: 13px 16px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chat-question-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15.5px;
+}
+
+.chat-answer-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.chat-q-icon,
+.chat-a-icon {
+  font-size: 17px;
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions button,
+.actions form button {
+  background: #fff;
+  color: #ff3b5c;
+  border: 2px solid #ff3b5c;
+  border-radius: 25px;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 13px 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 59, 92, 0.04);
+}
+
+.actions button:hover,
+.actions form button:hover {
+  background: #ff3b5c;
+  color: #fff;
+}
+
+@media (max-width: 500px) {
+  .mypage-container {
+    margin: 40px auto 0 auto;
+    padding: 28px 10px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+}

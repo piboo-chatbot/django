@@ -3,6 +3,7 @@ from .forms import UserForm
 from django.http import JsonResponse
 from .models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 def signin(request):
     if request.method == 'POST':
@@ -36,3 +37,10 @@ def check_nickname(request):
     nickname = request.GET.get('nickname')
     exists = User.objects.filter(nickname=nickname).exists()
     return JsonResponse({'exists': exists})
+
+def mypage_view(request):
+    return render(request, 'mypage.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('intro')

@@ -1,38 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@800&display=swap');
 
 body {
-  background: #fff;
   margin: 0;
+  font-family: 'Albert Sans', 'Pretendard', sans-serif;
+  background: linear-gradient(90deg, #fff5f8 60%, #ffe0ec 100%);
   min-height: 100vh;
-  font-family: 'Albert Sans', sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  padding-top: 60px;
 }
 
 .login-center {
   width: 100%;
-  max-width: 360px;
-  margin: 0 auto;
+  max-width: 400px;
+  margin: 60px 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(255, 59, 92, 0.08);
+  padding: 40px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .logo-img {
-  width: 90px;
-  margin: 0 auto 18px auto;
-  display: block;
+  width: 72px;
+  margin-bottom: 12px;
 }
 
 .brand {
-  font-family: 'Albert Sans', sans-serif;
   font-weight: 800;
-  font-size: 32px;
+  font-size: 36px;
   color: #ff3b5c;
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 24px;
   letter-spacing: -1px;
 }
 
@@ -40,20 +42,18 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 16px;
 }
 
 .input-wrap {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 14px;
+  width: 100%;
 }
 
 .input-icon {
   position: relative;
-  width: 100%;
 }
 
 .input-icon .icon {
@@ -78,15 +78,15 @@ body {
 
 .input-icon input {
   width: 100%;
-  padding: 12px 14px 12px 44px;
+  padding: 14px 16px 14px 46px;
   border: 1.5px solid #ffb3c1;
   border-radius: 8px;
   font-size: 15px;
-  background: #fff;
   color: #ff3b5c;
+  background: #fff;
   outline: none;
-  box-sizing: border-box;
   transition: border 0.2s;
+  box-sizing: border-box;
 }
 
 .input-icon input:focus {
@@ -96,17 +96,13 @@ body {
 .input-icon input::placeholder {
   color: #b2a6aa;
   font-weight: 400;
-  opacity: 1;
 }
 
 .login-options {
-  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   font-size: 13px;
   color: #b2a6aa;
-  margin-bottom: 10px;
 }
 
 .checkbox-label {
@@ -114,8 +110,6 @@ body {
   align-items: center;
   gap: 4px;
   font-size: 13px;
-  color: #b2a6aa;
-  user-select: none;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -126,14 +120,12 @@ body {
 
 .login-links {
   display: flex;
-  align-items: center;
   gap: 8px;
 }
 
 .login-links a {
   color: #b2a6aa;
   text-decoration: none;
-  font-size: 13px;
   transition: color 0.2s;
 }
 
@@ -142,11 +134,10 @@ body {
 }
 
 .social-login {
-  width: 100%;
   display: flex;
   justify-content: center;
   gap: 18px;
-  margin: 18px 0 18px 0;
+  margin: 20px 0;
 }
 
 .social-icon {
@@ -164,23 +155,29 @@ body {
   box-shadow: 0 2px 8px rgba(255,59,92,0.12);
 }
 
-.login-btn {
+.login-btn,
+.back {
   background: #ff3b5c;
   color: #fff;
   border: none;
   border-radius: 25px;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  padding: 15px 0;
+  padding: 13px 0;
   width: 100%;
-  margin-top: 6px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
   letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 59, 92, 0.08);
 }
 
-.login-btn:hover {
+.login-btn:hover,
+.back:hover {
   background: #fff;
   color: #ff3b5c;
   border: 2px solid #ff3b5c;
+}
+
+.back {
+  margin-top: 10px;
 }

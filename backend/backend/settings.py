@@ -88,10 +88,10 @@ AUTH_USER_MODEL = 'users.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DATABASE', 'pibudb'),
-        'USER': os.getenv('MYSQL_USER', 'django'),
-        'PASSWORD': os.getenv('MYSQL_PASSWORD', 'django'),
-        'HOST': os.getenv('MYSQL_HOST', 'mysql'), 
+        'NAME': os.getenv('MYSQL_DATABASE', 'piboo'),
+        'USER': os.getenv('MYSQL_USER', 'admin'),
+        'PASSWORD': os.getenv('MYSQL_PASSWORD', ''),
+        'HOST': os.getenv('MYSQL_HOST', ''),
         'PORT': os.getenv('MYSQL_PORT', '3306'),
         'OPTIONS': {
             'charset': 'utf8mb4',

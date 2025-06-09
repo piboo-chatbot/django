@@ -17,20 +17,23 @@
       <div class="slogan">성분부터 궁합까지,<br>똑똑한 화장품 도우미</div>
       <div class="desc">
         <span class="highlight">내 피부에 딱 맞는 스킨케어, PiBoo에서 시작하세요.</span><br>
-        PiBoo는 내 피부 타입과 고민, <br>
-        그리고 사용 중인 화장품 정보를 바탕으로<br>
+        PiBoo는 내 피부 타입과 고민, 그리고 내가 가진 화장품 정보를 바탕으로<br>
         <b>성분 분석</b>과 <b>제품 궁합 진단</b>을 통해<br>
-        <span class="point">믿을 수 있는 추천과 피부 고민 예방 가이드</span>를 제공하는 <br>AI 챗봇 서비스입니다.<br><br>
+        <span class="point">믿을 수 있는 추천과 피부 고민 예방 가이드</span>를 제공하는 AI 챗봇 서비스입니다.<br><br>
         <span class="desc-list">
           • 궁합이 좋은 조합 추천, 나쁜 조합 경고<br>
           • 실제 사용자 리뷰와 데이터 기반 맞춤 정보<br>
           • 쉽고 빠른 챗봇 대화로 건강한 피부 관리
         </span>
-      </div>
-      <div class="btn-group">
-        <button class="login-btn" onclick="location.href='{% url 'login' %}'">로그인</button>
-        <button class="signup-btn" onclick="location.href='{% url 'signup' %}'">회원가입</button>
-      </div>
+        </div>
+          <div class="btn-group">
+          {% if user.is_authenticated %}
+            <a href="{% url 'chatbot' %}" class="login-btn">채팅하러 가기</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="login-btn">로그인하기</a>
+            <a href="{% url 'signup' %}" class="signup-btn">회원가입</a>
+          {% endif %}
+        </div>
     </div>
   </div>
   <div class="right-section">

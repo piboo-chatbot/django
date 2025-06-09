@@ -207,9 +207,11 @@ function renderMessages() {
     {% endif %}
   </div>
 
-  <div class="logo-area">
-    <img src="{% static 'images/intro.png' %}" class="logo-img" alt="Piboo Logo">
-    <span class="logo-text">Piboo</span>
+    <div class="logo-area">
+    <a href="{% url 'intro' %}" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <img src="{% static 'images/intro.png' %}" class="logo-img" alt="Piboo Logo">
+      <span class="logo-text" style="color:#ff3b5c;">Piboo</span>
+    </a>
   </div>
   <div class="welcome-message" style="text-align:center; font-size:16px; margin: 20px 0; color:#ff3b5c;">
     {{ user.nickname }}님 환영합니다! 무엇을 도와드릴까요?

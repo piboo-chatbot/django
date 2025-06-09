@@ -13,7 +13,7 @@
             alert('값을 입력하세요!');
             return;
         }
-        fetch(`/check_${field}/?${field}=${encodeURIComponent(value)}`)
+        fetch(`/users/check_${field}/?${field}=${encodeURIComponent(value)}`)
             .then(response => response.json())
             .then(data => {
                 if (data.exists) alert('이미 사용 중입니다!');
@@ -75,7 +75,6 @@
             <input type="password" class="signup-input" name="password1" placeholder="비밀번호를 입력하세요" required oninput="validatePassword()">
             <input type="password" class="signup-input" name="password2" placeholder="비밀번호 확인하기" required oninput="validatePassword()">
             <div id="pw-msg" style="margin-bottom:10px; font-size:14px;"></div>
-
             <div class="button-row">
             <button type="submit" class="signup-btn" disabled>회원가입</button>
             <button type="button" class="back" onclick="location.href='{% url 'intro' %}'">돌아가기</button>

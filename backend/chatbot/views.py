@@ -35,7 +35,7 @@ chat_memory = get_chain(llm_model)
 @login_required
 def mypage_view(request):
     nickname = request.user.nickname
-    chat_logs = ChatLog.objects.filter(nickname=nickname).order_by('-created_at')
+    chat_logs = ChatLog.objects.filter(nickname=nickname).order_by('-created_at')[:5]
 
     context = {
         'user': request.user,

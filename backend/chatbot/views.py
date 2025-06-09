@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -40,17 +41,27 @@ def intro_view(request):
     return render(request, 'index.html')
 
 class AskView(APIView):
+<<<<<<< HEAD
     @method_decorator(login_required)
     def post(self, request):
         query = request.data.get('query')
         session_id = request.data.get('session_id')
         user = request.user
 
+=======
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        query = request.data.get('query')
+        #session_id = request.data.get('session_id')
+        session_id = request.user.id
+>>>>>>> 2fecb59d594b58b6ce8ebbaba535e84f26c01000
         search_results = search_documents(ensemble_retriever, query)
         response = chat_memory.invoke(
             {"query": query, "search_results": search_results},
             config={"configurable": {"session_id": session_id}}
         )
+<<<<<<< HEAD
 
         # DB에 저장
         ChatLog.objects.create(
@@ -95,3 +106,7 @@ def signup_view(request):
         return redirect('login')  # 회원가입 후 로그인 화면으로
 
     return render(request, 'signup.html')
+=======
+        print(f"query {query} | session_id {session_id}")
+        return Response({"answer": response.content}, status=status.HTTP_200_OK)
+>>>>>>> 2fecb59d594b58b6ce8ebbaba535e84f26c01000

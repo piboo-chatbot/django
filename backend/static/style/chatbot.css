@@ -28,12 +28,15 @@ body {
 
 .chat-area {
     flex: 1;
-    padding: 0 10vw 120px 10vw; /* 좌우 10vw, 하단 120px */
+    padding: 0 10vw 160px 10vw;
     display: flex;
     overflow-y: auto;
     flex-direction: column;
     gap: 12px;
     min-height: 0;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    /* height: calc(100vh - 140px); 삭제! */
 }
 
 .message-bubble {
@@ -75,27 +78,40 @@ body {
 }
 
 .input-container {
-    width: 95vw;         /* 전체의 80%만 사용 */
+    width: 95vw;         
     margin: 0 10vw;      /* 좌우 10vw씩 여백 */
     background: #f6f6f6;
     border-radius: 16px;
     box-shadow: 0 1px 8px rgba(0,0,0,0.04);
     display: flex;
-    align-items: center;
+    align-items:  flex-end; /* textarea가 아래 정렬되도록 */
     padding: 0 16px;
     gap: 10px;
-    height: 56px;
+    min-height: 56px;
+    height: auto; 
+    transition: min-height 0.1s;
 }
 
 .input-box {
+    font-family: 'Albert Sans', sans-serif;
     flex: 1;
     border: none;
     background: transparent;
-    padding: 0 8px;
-    font-size: 17px;
+    padding: 0px 8px;
+    font-size: 14px;
     outline: none;
     color: #222;
-    height: 35px;
+    resize: none;            
+    scrollbar-width: thin;      /* 얇은 스크롤바 */
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* thumb 색상, track 투명 */
+    overflow-y: auto; 
+    max-height: 160px;          /* 최대 높이 이상이면 스크롤 */     
+    min-height: 30px;           /* 한 줄일 때 높이 */
+    max-height: 160px;          /* 6~8줄 정도까지 자동 확장, 그 이상은 스크롤 */
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    transition: height 0.1s;
 }
 
 .send-btn {
@@ -105,6 +121,7 @@ body {
     border-radius: 8px;
     width: 70px;
     height: 38px;
+    margin-bottom : 10px;
     font-size: 17px;
     font-weight: 700;
     cursor: pointer;

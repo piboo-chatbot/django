@@ -121,6 +121,7 @@ body {
   letter-spacing: 0.5px;
   box-shadow: 0 2px 8px rgba(255, 59, 92, 0.08);
 }
+<<<<<<< HEAD
 
 .signup-btn {
   background: #ff3b5c;
@@ -144,4 +145,37 @@ body {
   background: #fff;
   color: #ff3b5c;
   border: 2px solid #ff3b5c;
+=======
+.signup-btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.signup-btn {
+    flex: 1 1 0;
+    padding: 10px 0;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #ff3b5c;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.signup-btn:disabled {
+    background: #ffd6df;
+    color: #fff;
+    cursor: not-allowed;
+    border: none;
+}
+
+.signup-btn:hover:enabled,
+.signup-btn:focus:enabled {
+    background: #fff;
+    color: #ff3b5c;
+    border: 2px solid #ff3b5c;
+>>>>>>> 2fecb59d594b58b6ce8ebbaba535e84f26c01000
 }

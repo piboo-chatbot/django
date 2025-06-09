@@ -1,109 +1,3 @@
-<!-- {% load static %}
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>마이페이지 - PiBoo</title>
-  <link rel="stylesheet" href="{% static 'style/mypage.css' %}">
-  <style>
-    /* 최근 대화 영역을 기본적으로 숨기기 */
-    .mypage-history {
-      display: none;
-      margin-top: 20px;
-    }
-
-    .toggle-btn {
-      margin-top: 20px;
-      background: #ff3b5c;
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 12px 20px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .toggle-btn:hover {
-      background: #fff;
-      color: #ff3b5c;
-      border: 2px solid #ff3b5c;
-    }
-  </style>
-</head>
-<body>
-  <div class="mypage-container">
-    <div class="mypage-header">
-      <h1>마이페이지</h1>
-      <div class="mypage-divider"></div>
-      <div class="profile-greeting">
-        <span class="nickname-main">{{ user.nickname }}님, 안녕하세요!</span>
-        <span class="profile-detail">
-          나이: {{ user.age }} / 성별:
-          {% if user.gender == 0 %}남자
-          {% elif user.gender == 1 %}여자
-          {% else %}-{% endif %}
-        </span>
-      </div>
-    </div>
-
-    <div class="mypage-stats">
-      <h2 class="section-title">나의 피부 통계</h2>
-      <div class="stat-item">
-        <span>✨ 추천받은 화장품:</span> <strong>12개</strong>
-      </div>
-      <div class="stat-item">
-        <span>📝 질문 수:</span> <strong>34회</strong>
-      </div>
-    </div>
-
-    <button class="toggle-btn" onclick="toggleHistory()">최근 대화 보기</button>
-    <div class="mypage-history" id="history-container">
-      <h2>최근 대화</h2>
-      {% for log in chat_logs %}
-      <div class="chat-item">
-        <div class="chat-question">
-          <span class="chat-icon">💬</span> {{ log.question }}
-        </div>
-        <div class="chat-answer">
-          <span class="chat-icon">🌸</span> {{ log.answer|truncatechars:100|linebreaksbr|safe }}
-        </div>
-      </div>
-      <hr class="chat-divider">
-      {% empty %}
-      <p class="no-chat">최근 대화 내역이 없습니다.</p>
-      {% endfor %}
-    </div>
-
-    <div class="mypage-routine">
-      <h2 class="section-title">나만의 뷰티 루틴</h2>
-      <p>🌞 아침: 클렌저 → 토너 → 세럼</p>
-      <p>🌙 밤: 클렌저 → 토너 → 에센스 → 크림</p>
-    </div>
-
-    <div class="actions">
-      <button class="action-btn" onclick="location.href='{% url 'chatbot' %}'">채팅으로 돌아가기</button>
-      <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button class="action-btn" type="submit">로그아웃</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    function toggleHistory() {
-      const history = document.getElementById('history-container');
-      if (history.style.display === 'none' || history.style.display === '') {
-        history.style.display = 'block';
-      } else {
-        history.style.display = 'none';
-      }
-    }
-  </script>
-</body>
-</html> -->
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
@@ -133,7 +27,7 @@
     </div>
 
         <!-- 최근 대화 카드형 토글 -->
-    <button class="recent-chat-toggle" onclick="toggleHistory()">최근 대화 보기</button>
+    <button class="recent-chat-toggle" id="toggle-btn" onclick="toggleHistory()">최근 대화 보기</button>
     <div class="recent-chat-card" id="history-container">
       <h3 class="recent-chat-title">최근 대화</h3>
       <div class="recent-chat-list">
@@ -153,7 +47,7 @@
     </div>
     
     <div class="mypage-stats">
-      <h2 class="section-title">나의 피부 통계</h2>
+      <h2 class="section-title1">나의 피부 통계</h2>
       <div class="stat-item">
         <span>✨ 추천받은 화장품:</span> <strong>12개</strong>
       </div>
@@ -164,9 +58,10 @@
 
 
     <div class="mypage-routine">
-      <h2 class="section-title">나만의 뷰티 루틴</h2>
-      <p>🌞 아침: 클렌저 → 토너 → 세럼</p>
-      <p>🌙 밤: 클렌저 → 토너 → 에센스 → 크림</p>
+      <h2 class="section-title2">나만의 뷰티 루틴</h2>
+        <p>🌞 아침: 클렌저 → 토너 → 세럼</p>
+        <p>🌙 밤: 클렌저 → 토너 → 에센스 → 크림</p>
+      
     </div>
 
     <div class="actions">
@@ -181,12 +76,15 @@
   <script>
     function toggleHistory() {
       const history = document.getElementById('history-container');
+      const toggleBtn = document.getElementById('toggle-btn');
       if (history.style.display === 'none' || history.style.display === '') {
         history.style.display = 'block';
+        toggleBtn.innerText = "최근 대화 닫기";
       } else {
         history.style.display = 'none';
+        toggleBtn.innerText = "최근 대화 보기";
       }
-    }
+  }
   </script>
 </body>
 </html>

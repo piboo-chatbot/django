@@ -14,80 +14,71 @@ body {
   width: 100%;
   max-width: 420px;
   margin: 60px auto 0 auto;
-  background: rgba(255,255,255,0.97);
+  background: #fff;
   border-radius: 32px;
   box-shadow: 0 8px 32px rgba(255, 59, 92, 0.08);
   padding: 48px 32px;
   text-align: left;
 }
 
-h1 {
-  color: #ff3b5c;
+.mypage-header {
+  margin-bottom: 28px;
+}
+
+.mypage-header h1 {
+  color: #222;
   font-size: 30px;
   font-weight: 800;
-  margin-bottom: 30px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
-.profile-info p,
-.stat-item,
-.mypage-routine p {
+.mypage-divider {
+  width: 100%;
+  height: 2px;
+  background: #ff3b5c;
+  margin: 0 auto 18px auto;
+  border-radius: 2px;
+}
+
+.profile-greeting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-left: 2px;
+}
+
+.nickname-main {
+  font-size: 20px;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 2px;
+  letter-spacing: -0.5px;
+}
+
+.profile-detail {
+  font-size: 14px;
+  color: #888;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+.section-title1,.section-title2 {
+  display: inline-block;
+  font-size: 18px;
+  color: #222;
+  font-weight: 700;
+  border-bottom: 2.5px solid #ff3b5c;
+  padding-bottom: 2px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.stat-item, .mypage-routine p {
   font-size: 16px;
   color: #444;
-  margin: 8px 0;
-}
-
-.profile-info p strong,
-.mypage-stats h2,
-.mypage-history h2,
-.mypage-routine h2 {
-  color: #ff3b5c;
-  font-weight: 700;
-}
-
-.mypage-stats,
-.mypage-history,
-.mypage-routine {
-  margin: 24px 0;
-}
-
-.chat-history-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.chat-bubble {
-  background: #fff0f3;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(255, 59, 92, 0.04);
-  padding: 13px 16px 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.chat-question-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: #333;
-  font-size: 15.5px;
-}
-
-.chat-answer-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  color: #555;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.chat-q-icon,
-.chat-a-icon {
-  font-size: 17px;
+  margin-bottom: 6px;
 }
 
 .actions {
@@ -98,7 +89,9 @@ h1 {
 }
 
 .actions button,
-.actions form button {
+.actions form button,
+.action-btn {
+  width: 100%;
   background: #fff;
   color: #ff3b5c;
   border: 2px solid #ff3b5c;
@@ -113,9 +106,94 @@ h1 {
 }
 
 .actions button:hover,
-.actions form button:hover {
+.actions form button:hover,
+.action-btn:hover {
   background: #ff3b5c;
   color: #fff;
+}
+
+/* 최근 대화 카드 토글/디자인 */
+.recent-chat-toggle {
+  display: block;
+  width: 100%;
+  margin: 35px 0 40px 0;
+  padding: 13px 0;
+  background: #ff3b5c;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 59, 92, 0.08);
+  height: 60px;
+}
+
+.recent-chat-toggle:hover {
+  background: #e82c4c;
+}
+
+.recent-chat-card {
+  background: #ff3b5c;
+  border-radius: 0 0 18px 18px;
+  margin-bottom: 24px;
+  padding: 0 0 18px 0;
+  box-shadow: 0 6px 24px rgba(255, 59, 92, 0.10);
+  animation: fadeIn 0.2s;
+}
+
+.recent-chat-title {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 18px 24px 8px 24px;
+  margin: 0;
+}
+
+.recent-chat-list {
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.recent-chat-bubble {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #222;
+  box-shadow: 0 1px 4px rgba(255,59,92,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.recent-chat-q {
+  font-weight: 700;
+  color: #ff3b5c;
+  margin-bottom: 2px;
+  font-size: 15px;
+}
+
+.recent-chat-a {
+  color: #555;
+  font-size: 15px;
+}
+
+.recent-chat-icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.no-chat {
+  color: #bbb;
+  padding: 20px 0;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
 @media (max-width: 500px) {
@@ -123,7 +201,7 @@ h1 {
     margin: 40px auto 0 auto;
     padding: 28px 10px;
   }
-  h1 {
+  .mypage-header h1 {
     font-size: 26px;
   }
 }

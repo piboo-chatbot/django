@@ -6,6 +6,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+# askview 모델
+from .models import ChatLog
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from langchain_openai import ChatOpenAI
 from chatbot.chain import get_chain
@@ -36,16 +40,26 @@ def intro_view(request):
     return render(request, 'index.html')
 
 class AskView(APIView):
+    @method_decorator(login_required)
     def post(self, request):
         query = request.data.get('query')
         session_id = request.data.get('session_id')
+        user = request.user
+
         search_results = search_documents(ensemble_retriever, query)
         response = chat_memory.invoke(
             {"query": query, "search_results": search_results},
             config={"configurable": {"session_id": session_id}}
         )
-        return Response({"answer": response.content}, status=status.HTTP_200_OK)
-    
+
+        # DB에 저장
+        ChatLog.objects.create(
+            nickname=user.nickname,  # user.nickname으로 사용자 닉네임 가져오기
+            question=query,
+            answer=response.content
+        )
+
+        return Response({"answer": response.content}, status=status.HTTP_200_OK)    
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']

@@ -30,6 +30,7 @@ body {
     flex: 1;
     padding: 0 10vw 120px 10vw; /* 좌우 10vw, 하단 120px */
     display: flex;
+    overflow-y: auto;
     flex-direction: column;
     gap: 12px;
     min-height: 0;
@@ -113,4 +114,26 @@ body {
 .send-btn:hover {
     background: #ff3b5c;
     color: #fff;
+}
+
+.input-box {
+    font-family: 'Albert Sans', sans-serif;
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0px 8px;
+    font-size: 14px;
+    outline: none;
+    color: #222;
+    resize: none;            
+    scrollbar-width: thin;      /* 얇은 스크롤바 */
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* thumb 색상, track 투명 */
+    overflow-y: auto; 
+    max-height: 160px;          /* 최대 높이 이상이면 스크롤 */     
+    min-height: 30px;           /* 한 줄일 때 높이 */
+    max-height: 160px;          /* 6~8줄 정도까지 자동 확장, 그 이상은 스크롤 */
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    transition: height 0.1s;
 }

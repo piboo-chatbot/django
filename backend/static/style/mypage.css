@@ -1,0 +1,92 @@
+body {
+  background: #f9f9f9;
+  font-family: 'Albert Sans', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.mypage-container {
+  width: 100%;
+  max-width: 420px;
+  margin: 48px auto 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #ff3b5c;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.profile-info p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.profile-info p strong {
+  color: #ff3b5c;
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions button,
+.actions form button {
+  background: #ff3b5c;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.actions button:hover,
+.actions form button:hover {
+  background: #fff;
+  color: #ff3b5c;
+  border: 2px solid #ff3b5c;
+}
+
+.profile-info p {
+  font-size: 16px;
+  color: #ff3b5c; /* 글자 색상! 너무 밝으면 안 보임 */
+  margin: 10px 0;
+}
+
+.actions button, .actions form button {
+  background: #ff3b5c;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 13px 0;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.5px;
+  display: block;
+  margin: 10px 0;
+}
+
+.actions button:hover, .actions form button:hover {
+  background: #fff;
+  color: #ff3b5c;
+  border: 2px solid #ff3b5c;
+}

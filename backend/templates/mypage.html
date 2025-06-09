@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>마이페이지 - PiBoo</title>
+  <link rel="stylesheet" href="{% static 'style/mypage.css' %}">
+</head>
+<body>
+  <div class="mypage-container">
+    <h1>마이페이지</h1>
+    <div class="profile-info">
+      <p><strong>닉네임:</strong> {{ user.nickname }}</p>
+      <p><strong>나이:</strong> {{ user.age }}</p>
+      <p><strong>성별:</strong> {{ user.gender }}</p>
+    </div>
+    <div class="mypage-stats">
+      <h2>나의 피부 통계</h2>
+      <div class="stat-item">
+        <span>✨ 추천받은 화장품:</span> <strong>12개</strong>
+      </div>
+      <div class="stat-item">
+        <span>📝 질문 수:</span> <strong>34회</strong>
+      </div>
+    </div>
+
+    <div class="mypage-history">
+      <h2>최근 대화</h2>
+      <ul>
+        <li>💬 "내 피부 타입에 맞는 세럼 추천해줘"</li>
+        <li>💬 "지성피부에 좋은 토너 있니?"</li>
+      </ul>
+    </div>
+
+    <div class="mypage-routine">
+      <h2>나만의 뷰티 루틴</h2>
+      <p>🌞 아침: 클렌저 → 토너 → 세럼</p>
+      <p>🌙 밤: 클렌저 → 토너 → 에센스 → 크림</p>
+    </div>
+
+    <div class="actions">
+      <button onclick="location.href='{% url 'chatbot' %}'">채팅으로 돌아가기</button>
+      <!-- 로그아웃은 실제 로그아웃 처리 URL을 호출 -->
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">로그아웃</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

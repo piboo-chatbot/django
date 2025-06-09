@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
 
 class User(AbstractUser):
     nickname = models.CharField('닉네임', max_length=50, unique=True)
@@ -15,3 +16,14 @@ class User(AbstractUser):
   
     def __str__(self):
         return self.username
+    
+
+class ChatHistory(models.Model):
+    nickname = models.CharField(max_length=50)
+    question = models.TextField()
+    answer = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nickname}의 질문: {self.question[:20]}..."
+

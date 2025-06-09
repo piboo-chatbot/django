@@ -1,53 +1,12 @@
-{% load static %}
+<!-- {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <title>Piboo-chat</title>
   <link rel="stylesheet" href="{% static 'style/chatbot.css' %}">
-  <style>
-    /* 간단한 메뉴바 스타일 (필요시 style/chatbot.css에 통합하세요) */
-    .sidebar {
-      position: fixed;
-      right: -200px; /* 시작은 숨김 */
-      top: 0;
-      width: 200px;
-      height: 100%;
-      background: #ff3b5c;
-      color: #fff;
-      transition: right 0.3s;
-      padding: 20px;
-      box-sizing: border-box;
-      z-index: 1000;
-    }
-    .sidebar.show {
-      right: 0;
-    }
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #ff3b5c;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      padding: 10px 15px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    .sidebar a {
-      display: block;
-      margin-bottom: 15px;
-      color: #fff;
-      text-decoration: none;
-    }
-    .sidebar a:hover {
-      text-decoration: underline;
-    }
-  </style>
 </head>
 <body>
-<<<<<<< HEAD
   <button class="menu-toggle">≡</button>
   <div class="sidebar" id="sidebar">
     <h2>메뉴</h2>
@@ -69,7 +28,7 @@
 
   <div class="input-area">
     <div class="input-container">
-      <input type="text" class="input-box" id="user-input" placeholder="질문을 입력하세요..." autocomplete="off" />
+       <textarea class="input-box" id="user-input" placeholder="질문을 입력하세요..." autocomplete="off"></textarea>
       <button class="send-btn" id="send-btn">Send</button>
     </div>
   </div>
@@ -99,43 +58,7 @@
             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
             break;
           }
-=======
-    <div class="logo-area">
-        <img src="{% static 'images/intro.png' %}" class="logo-img" alt="Piboo Logo">
-        <span class="logo-text">Piboo</span>
-    </div>
-    <div class="chat-area" id="chat-area"></div>
-    <div class="input-area">
-        <div class="input-container">
-            <!-- <input type="text" class="input-box" id="user-input" placeholder="" autocomplete="off"/>
-              -->
-            <textarea class="input-box" id="user-input" placeholder="" autocomplete="off"></textarea>
-            <button class="send-btn" id="send-btn">Send</button>
-        </div>
-    </div>
 
-    <script>
-        const chatArea = document.getElementById("chat-area");
-        const inputBox = document.getElementById("user-input");
-        const sendBtn = document.getElementById("send-btn");
-
-        let messages = [];
-
-        // CSRF 토큰 가져오기
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
->>>>>>> 2fecb59d594b58b6ce8ebbaba535e84f26c01000
         }
       }
       return cookieValue;
@@ -161,7 +84,6 @@ function renderMessages() {
                 div.innerHTML = formatContent(msg.content);
                 chatArea.appendChild(div);
             }
-<<<<<<< HEAD
 
             // 스크롤 하단 고정
             setTimeout(() => {
@@ -227,74 +149,214 @@ function renderMessages() {
       }
     });
   </script>
-=======
 
-            // 스크롤 하단 고정
-            setTimeout(() => {
-                const lastMsg = chatArea.lastElementChild;
-                if (lastMsg) {
-                    lastMsg.scrollIntoView({ behavior: "smooth", block: "end" });
-                }
+</body>
+</html> -->
 
-                window.scrollTo({
-                    top: document.documentElement.scrollHeight,
-                    behavior: 'smooth'
-                });
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>Piboo-chat</title>
+  <link rel="stylesheet" href="{% static 'style/chatbot.css' %}">
+  <style>
+    .sidebar {
+      position: fixed;
+      right: -200px;
+      top: 0;
+      width: 200px;
+      height: 100%;
+      background: #ff3b5c;
+      color: #fff;
+      transition: right 0.3s;
+      padding: 20px;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+    .sidebar.show { right: 0; }
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ff3b5c;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .sidebar a {
+      display: block;
+      margin-bottom: 15px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .sidebar a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <button class="menu-toggle">≡</button>
+  <div class="sidebar" id="sidebar">
+    <h2>메뉴</h2>
+    <a href="{% url 'mypage' %}">마이페이지</a>
+    <a href="#">설정</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">로그아웃</a>
+    {% endif %}
+  </div>
 
-            }, 0);
-            
+  <div class="logo-area">
+    <img src="{% static 'images/intro.png' %}" class="logo-img" alt="Piboo Logo">
+    <span class="logo-text">Piboo</span>
+  </div>
+  <div class="welcome-message" style="text-align:center; font-size:16px; margin: 20px 0; color:#ff3b5c;">
+    {{ user.nickname }}님 환영합니다! 무엇을 도와드릴까요?
+  </div>
+  <div class="chat-area" id="chat-area"></div>
+
+  <div class="input-area">
+    <div class="input-container">
+      <button class="clear-btn" id="clear-chat">비우기</button>
+      <textarea class="input-box" id="user-input" placeholder="질문을 입력하세요..." autocomplete="off"></textarea>
+      <button class="send-btn" id="send-btn">Send</button>
+    </div>
+  </div>
+
+<script>
+  const chatArea = document.getElementById("chat-area");
+  const inputBox = document.getElementById("user-input");
+  const sendBtn = document.getElementById("send-btn");
+  const sidebar = document.getElementById("sidebar");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const clearBtn = document.getElementById("clear-chat");
+
+  let messages = JSON.parse(localStorage.getItem("chatHistory") || "[]");
+
+  // ✅ cleared 상태 확인
+  let cleared = localStorage.getItem("cleared") === "true";
+
+  // ✅ 메뉴 토글
+  menuToggle.onclick = () => {
+    sidebar.classList.toggle("show");
+  };
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
         }
+      }
+    }
+    return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
 
-        async function sendMessage() {
-            const val = inputBox.value.trim();
-            if (!val) return;
+  function renderMessages() {
+  // cleared 상태면 내용 비우고 스크롤 처리 안함!
+  if (cleared) {
+    chatArea.innerHTML = "";
+    return;
+  }
 
-            messages.push({role: "user", content: val});
-            renderMessages();
-            inputBox.value = "";
+  function formatContent(str) {
+    const escaped = str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+    return escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
+  }
 
-            try {
-                const response = await fetch("{% url 'ask' %}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": csrftoken
-                    },
-                    body: JSON.stringify({ query: val })
-                });
+  chatArea.innerHTML = "";
+  for (const msg of messages) {
+    const div = document.createElement("div");
+    div.className = "message-bubble " + (msg.role === "user" ? "user-message" : "bot-message");
+    div.innerHTML = formatContent(msg.content);
+    chatArea.appendChild(div);
+  }
 
-                if (response.ok) {
-                    const data = await response.json();
-                    messages.push({role: "bot", content: data.answer || "답변이 없습니다."});
-                } else {
-                    messages.push({role: "bot", content: "❌ 오류가 발생했습니다. 다시 시도해주세요."});
-                }
-                renderMessages();
+  setTimeout(() => {
+    const lastMsg = chatArea.lastElementChild;
+    if (lastMsg) {
+      lastMsg.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth'
+    });
+  }, 0);
+}
 
-            } catch (e) {
-                messages.push({role: "bot", content: "❌ 서버 연결 오류: " + e});
-                renderMessages();
-            }
-        }
-        
-        let isComposing = false;
 
-        inputBox.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
+  renderMessages();
 
-        inputBox.addEventListener("compositionstart", () => { isComposing = true; });
-        inputBox.addEventListener("compositionend", () => { isComposing = false; });
+  async function sendMessage() {
+    const val = inputBox.value.trim();
+    if (!val) return;
 
-        inputBox.addEventListener("keydown", function(e) {
-            if (e.key === "Enter" && !e.shiftKey && !isComposing) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-        sendBtn.onclick = sendMessage;
-    </script>
->>>>>>> 2fecb59d594b58b6ce8ebbaba535e84f26c01000
+    // ✅ 새 채팅 시작 시 cleared 상태 해제
+    if (cleared) {
+      cleared = false;
+      localStorage.removeItem("cleared");
+      messages = []; // 기존 기록도 지움
+    }
+
+    messages.push({ role: "user", content: val });
+    renderMessages();
+    inputBox.value = "";
+
+    try {
+      const response = await fetch("{% url 'ask' %}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken
+        },
+        body: JSON.stringify({ query: val })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        messages.push({ role: "bot", content: data.answer || "답변이 없습니다." });
+      } else {
+        messages.push({ role: "bot", content: "❌ 오류가 발생했습니다. 다시 시도해주세요." });
+      }
+    } catch (e) {
+      messages.push({ role: "bot", content: "❌ 서버 연결 오류: " + e });
+    }
+
+    localStorage.setItem("chatHistory", JSON.stringify(messages));
+    renderMessages();
+  }
+
+  sendBtn.onclick = sendMessage;
+  let isComposing = false;
+  inputBox.addEventListener("compositionstart", () => { isComposing = true; });
+  inputBox.addEventListener("compositionend", () => { isComposing = false; });
+  inputBox.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && !isComposing) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  clearBtn.onclick = () => {
+    chatArea.innerHTML = "<div id='cleared-msg' style='color:#ff3b5c; text-align:center; padding: 20px; border: 1px solid #ffb3c1; border-radius: 8px; margin: 10px;'>✅ 대화 기록이 비워졌습니다.</div>";
+    cleared = true;
+    localStorage.setItem("cleared", "true");
+    setTimeout(() => {
+      const msg = document.getElementById("cleared-msg");
+      if (msg) {
+        msg.remove();
+      }
+    }, 2000);
+  };
+</script>
+
 </body>
 </html>

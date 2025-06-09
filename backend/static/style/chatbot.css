@@ -1,156 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@800&display=swap');
+
 body {
-    font-family: 'Albert Sans', sans-serif;
-    background: #fff;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  margin: 0;
+  font-family: 'Albert Sans', 'Pretendard', sans-serif;
+  background: linear-gradient(90deg, #fff5f8 60%, #ffe0ec 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo-area {
-    display: flex;
-    align-items: center;
-    padding: 40px 0 0 60px;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  padding: 40px 0 0 60px;
+  gap: 12px;
 }
 
 .logo-img {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 .logo-text {
-    font-size: 36px;
-    font-weight: 700;
-    color: #ff3b5c;
-    letter-spacing: -1px;
+  font-size: 36px;
+  font-weight: 700;
+  color: #ff3b5c;
+  letter-spacing: -1px;
 }
 
 .chat-area {
-    flex: 1;
-    padding: 0 10vw 160px 10vw;
-    display: flex;
-    overflow-y: auto;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 0;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    /* height: calc(100vh - 140px); 삭제! */
+  flex: 1;
+  padding: 0 10vw 160px 10vw;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .message-bubble {
-    max-width: 75%;
-    padding: 14px 22px;
-    border-radius: 14px;
-    font-size: 15px;
-    line-height: 1.6;
-    word-break: break-word;
-    margin: 18px 0 0 0;
-    box-sizing: border-box;
+  max-width: 75%;
+  padding: 14px 22px;
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  word-break: break-word;
+  box-sizing: border-box;
+  box-shadow: 0 4px 16px rgba(255, 59, 92, 0.08);
 }
 
 .user-message {
-    max-width: 75%;
-    background: #ff3b5c;
-    color: #ffffff;
-    margin-left: auto;
-    border-radius: 12px 12px 4px 12px;
+  background: #ff3b5c;
+  color: #ffffff;
+  margin-left: auto;
+  border-radius: 14px 14px 4px 14px;
 }
 
 .bot-message {
-    background:#fff0f3;
-    color: #ff3b5c;
-    margin-right: auto;
-    border-radius: 12px 12px 12px 4px;
+  background: #ffffff; /* ✅ 대답 박스는 하얀색 */
+  color: #ff3b5c;
+  margin-right: auto;
+  border-radius: 14px 14px 14px 4px;
 }
+
 .input-area {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100vw;
-    background: none;
-    padding: 0 0 40px 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    z-index: 100;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background: transparent;
+  padding: 0 0 40px 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
 }
 
 .input-container {
-    width: 95vw;         
-    margin: 0 10vw;      /* 좌우 10vw씩 여백 */
-    background: #f6f6f6;
-    border-radius: 16px;
-    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
-    display: flex;
-    align-items:  flex-end; /* textarea가 아래 정렬되도록 */
-    padding: 0 16px;
-    gap: 10px;
-    min-height: 56px;
-    height: auto; 
-    transition: min-height 0.1s;
+  width: 95vw;
+  margin: 0 10vw;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(255, 59, 92, 0.08);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 16px;
+  gap: 10px;
+  min-height: 56px;
+  transition: min-height 0.1s;
 }
 
 .input-box {
-    font-family: 'Albert Sans', sans-serif;
-    flex: 1;
-    border: none;
-    background: transparent;
-    padding: 0px 8px;
-    font-size: 14px;
-    outline: none;
-    color: #222;
-    resize: none;            
-    scrollbar-width: thin;      /* 얇은 스크롤바 */
-    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* thumb 색상, track 투명 */
-    overflow-y: auto; 
-    max-height: 160px;          /* 최대 높이 이상이면 스크롤 */     
-    min-height: 30px;           /* 한 줄일 때 높이 */
-    max-height: 160px;          /* 6~8줄 정도까지 자동 확장, 그 이상은 스크롤 */
-    line-height: 1.5;
-    box-sizing: border-box;
-    width: 100%;
-    transition: height 0.1s;
+  font-family: 'Albert Sans', sans-serif;
+  flex: 1;
+  border: none;
+  background: transparent;
+  /* padding: 8px; */
+  font-size: 15px;
+  outline: none;
+  color: #222;
+  resize: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  overflow-y: auto;
+  max-height: 160px;
+  min-height: 30px;
+  line-height: 38px; 
+  line-height: 1.5;
+  box-sizing: border-box;
+  transition: height 0.1s;
+  padding-top: 10px 8px;
 }
 
 .send-btn {
-    background:#ffb3c1;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    width: 70px;
-    height: 38px;
-    margin-bottom : 10px;
-    font-size: 17px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+  background: #ffb3c1;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  width: 70px;
+  height: 38px;
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
 .send-btn:hover {
-    background: #ff3b5c;
-    color: #fff;
+  background: #ff3b5c;
+  color: #fff;
 }
 
-.input-box {
-    font-family: 'Albert Sans', sans-serif;
-    flex: 1;
-    border: none;
-    background: transparent;
-    padding: 0px 8px;
-    font-size: 14px;
-    outline: none;
-    color: #222;
-    resize: none;            
-    scrollbar-width: thin;      /* 얇은 스크롤바 */
-    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* thumb 색상, track 투명 */
-    overflow-y: auto; 
-    max-height: 160px;          /* 최대 높이 이상이면 스크롤 */     
-    min-height: 30px;           /* 한 줄일 때 높이 */
-    max-height: 160px;          /* 6~8줄 정도까지 자동 확장, 그 이상은 스크롤 */
-    line-height: 1.5;
-    box-sizing: border-box;
-    width: 100%;
-    transition: height 0.1s;
+.clear-btn {
+  background: #ff3b5c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.clear-btn:hover {
+  background: #fff;
+  color: #ff3b5c;
+  border: 2px solid #ff3b5c;
 }

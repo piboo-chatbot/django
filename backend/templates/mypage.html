@@ -5,15 +5,49 @@
   <meta charset="UTF-8">
   <title>마이페이지 - PiBoo</title>
   <link rel="stylesheet" href="{% static 'style/mypage.css' %}">
+  <style>
+    /* 최근 대화 영역을 기본적으로 숨기기 */
+    .mypage-history {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .toggle-btn {
+      margin-top: 20px;
+      background: #ff3b5c;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .toggle-btn:hover {
+      background: #fff;
+      color: #ff3b5c;
+      border: 2px solid #ff3b5c;
+    }
+  </style>
 </head>
 <body>
   <div class="mypage-container">
     <h1>마이페이지</h1>
     <div class="profile-info">
-      <p><strong>닉네임:</strong> {{ user.nickname }}</p>
-      <p><strong>나이:</strong> {{ user.age }}</p>
-      <p><strong>성별:</strong> {{ user.gender }}</p>
+      <span class="profile-label">닉네임:</span>
+      <span class="profile-value">{{ user.nickname }}</span>
+      <span class="profile-label">나이:</span>
+      <span class="profile-value">{{ user.age }}</span>
+      <span class="profile-label">성별:</span>
+      <span class="profile-value">
+        {% if user.gender == 0 %}남자
+        {% elif user.gender == 1 %}여자
+        {% else %}-{% endif %}
+      </span>
     </div>
+
     <div class="mypage-stats">
       <h2>나의 피부 통계</h2>
       <div class="stat-item">
@@ -24,13 +58,28 @@
       </div>
     </div>
 
-    <div class="mypage-history">
+    <!-- 최근 대화 보기 버튼 -->
+    <button class="toggle-btn" onclick="toggleHistory()">최근 대화 보기</button>
+
+    <!-- 최근 대화 영역 (기본적으로 숨김) -->
+      <div class="mypage-history" id="history-container">
       <h2>최근 대화</h2>
-      <ul>
-        <li>💬 "내 피부 타입에 맞는 세럼 추천해줘"</li>
-        <li>💬 "지성피부에 좋은 토너 있니?"</li>
-      </ul>
+      {% for log in chat_logs %}
+      <div class="chat-item">
+        <div class="chat-question">
+          <span class="chat-icon">💬</span> {{ log.question }}
+        </div>
+        <div class="chat-answer">
+          <span class="chat-icon">🌸</span> {{ log.answer|truncatechars:100|linebreaksbr|safe }}
+        </div>
+      </div>
+      <hr class="chat-divider">
+    {% empty %}
+      <p class="no-chat">최근 대화 내역이 없습니다.</p>
+    {% endfor %}
     </div>
+
+
 
     <div class="mypage-routine">
       <h2>나만의 뷰티 루틴</h2>
@@ -40,12 +89,22 @@
 
     <div class="actions">
       <button onclick="location.href='{% url 'chatbot' %}'">채팅으로 돌아가기</button>
-      <!-- 로그아웃은 실제 로그아웃 처리 URL을 호출 -->
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit">로그아웃</button>
       </form>
     </div>
   </div>
+
+  <script>
+    function toggleHistory() {
+      const history = document.getElementById('history-container');
+      if (history.style.display === 'none' || history.style.display === '') {
+        history.style.display = 'block';
+      } else {
+        history.style.display = 'none';
+      }
+    }
+  </script>
 </body>
 </html>

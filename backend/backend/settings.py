@@ -16,8 +16,7 @@ STATIC_URL = '/static/'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST1'), os.getenv('ALLOWED_HOST2')]
 
 # Application definition
 

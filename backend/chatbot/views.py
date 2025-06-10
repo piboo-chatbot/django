@@ -18,7 +18,7 @@ from retriever.utils import (
     set_embedding_model, load_chromadbs, create_ensemble_retriever, search_documents
 )
 
-from chatbot.qlora import load_qlora_llm
+# from chatbot.qlora import load_qlora_llm
 
 # (초기화 작업: 임베딩/리트리버/체인 등)
 embedding_model = set_embedding_model()

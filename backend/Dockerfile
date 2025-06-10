@@ -27,4 +27,4 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 # 8. Django 앱을 Gunicorn으로 실행 
-CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "backend.wsgi:application", "gunicorn.conf.py"]

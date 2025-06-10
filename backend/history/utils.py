@@ -1,22 +1,37 @@
 from langchain_core.chat_history import BaseChatMessageHistory
+from chatbot.models import ChatLog
+from langchain_core.messages import AIMessage, HumanMessage
 
-# 세션별 대화 기록을 메모리에 저장하는 딕셔너리
-store = {}
-
-class InMemoryHistory(BaseChatMessageHistory):
-    def __init__(self):
-        self.messages = []
+class ChatLogHistory(BaseChatMessageHistory):
+    def __init__(self, nickname):
+        self.nickname = nickname
 
     def add_messages(self, messages):
-        self.messages.extend(messages)
-        
+        question, answer = None, None
+        for msg in messages:
+            if isinstance(msg, HumanMessage):
+                question = msg.content
+            elif isinstance(msg, AIMessage):
+                answer = msg.content
+
+        if question and answer:
+            ChatLog.objects.create(
+                nickname=self.nickname,
+                question=question,
+                answer=answer
+            )
+
+    @property
+    def messages(self):
+        logs = ChatLog.objects.filter(nickname=self.nickname).order_by("created_at")
+        result = []
+        for log in logs:
+            result.append(HumanMessage(content=log.question))
+            result.append(AIMessage(content=log.answer))
+        return result
+
     def clear(self):
-        self.messages = []
+        ChatLog.objects.filter(nickname=self.nickname).delete()
 
-    def __repr__(self):
-        return str(self.messages)
-
-def get_by_session_id(session_id):
-    if session_id not in store:
-        store[session_id] = InMemoryHistory()
-    return store[session_id]
+def get_by_nickname(nickname):
+    return ChatLogHistory(nickname)

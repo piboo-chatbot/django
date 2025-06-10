@@ -30,7 +30,6 @@ llm_model = ChatOpenAI(model_name='gpt-4o-mini', temperature=0.4)
 #         adapter_path="./qlora_model_koalpaca"
 #     )
 # chat_memory = get_chain(qlora_model)#llm_model
-chat_memory = get_chain(llm_model)
 
 @login_required
 def mypage_view(request):
@@ -56,7 +55,8 @@ class AskView(APIView):
         query = request.data.get('query')
         session_id = request.data.get('session_id')
         user = request.user
-
+        nickname = request.user.nickname
+        chat_memory = get_chain(llm_model, nickname)
 
         search_results = search_documents(ensemble_retriever, query)
         response = chat_memory.invoke(

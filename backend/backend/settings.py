@@ -84,32 +84,32 @@ WSGI_APPLICATION = "backend.wsgi.application"
 AUTH_USER_MODEL = 'users.User'
 
 # MySQL 연결 설정
-DATABASE = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('RDS_DATABASE'),
-        'USER': os.getenv('RDS_USER'),
-        'PASSWORD': os.getenv('RDS_PASSWORD'),
-        'HOST': os.getenv('RDS_HOST'),
-        'PORT': os.getenv('RDS_PORT'),
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        }
-    }
-}
-# DATABASES = {
+# DATABASE = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'piboo_rds',
-#         'USER': 'admin',
-#         'PASSWORD': 'qwer1234',
-#         'HOST': 'piboo-rds.cz80qks8ud0q.ap-northeast-2.rds.amazonaws.com',
-#         'PORT': '3306',
+#         'NAME': os.getenv('RDS_DATABASE'),
+#         'USER': os.getenv('RDS_USER'),
+#         'PASSWORD': os.getenv('RDS_PASSWORD'),
+#         'HOST': os.getenv('RDS_HOST'),
+#         'PORT': os.getenv('RDS_PORT'),
 #         'OPTIONS': {
-#             'charset': 'utf8mb4'
+#             'charset': 'utf8mb4',
 #         }
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'piboo_rds',
+        'USER': 'admin',
+        'PASSWORD': 'qwer1234',
+        'HOST': 'piboo-rds.cz80qks8ud0q.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4'
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
